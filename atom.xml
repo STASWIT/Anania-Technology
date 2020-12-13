@@ -6,7 +6,7 @@
   <link href="http://anania.staswit.name/atom.xml" rel="self"/>
   
   <link href="http://anania.staswit.name/"/>
-  <updated>2020-12-13T03:01:44.872Z</updated>
+  <updated>2020-12-13T08:31:58.894Z</updated>
   <id>http://anania.staswit.name/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中缀表达式的转换和计算</title>
+    <link href="http://anania.staswit.name/2020/12/13/%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%92%8C%E8%AE%A1%E7%AE%97/"/>
+    <id>http://anania.staswit.name/2020/12/13/%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2%E5%92%8C%E8%AE%A1%E7%AE%97/</id>
+    <published>2020-12-13T08:23:19.000Z</published>
+    <updated>2020-12-13T08:31:58.894Z</updated>
+    
+    
+    
+    
+    <category term="墨可莉雅" scheme="http://anania.staswit.name/categories/%E5%A2%A8%E5%8F%AF%E8%8E%89%E9%9B%85/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
