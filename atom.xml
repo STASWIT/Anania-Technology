@@ -6,7 +6,7 @@
   <link href="http://anania.staswit.name/atom.xml" rel="self"/>
   
   <link href="http://anania.staswit.name/"/>
-  <updated>2020-12-13T08:31:58.894Z</updated>
+  <updated>2021-01-04T15:35:42.961Z</updated>
   <id>http://anania.staswit.name/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mirai-Webhook-Bridge Docs</title>
+    <link href="http://anania.staswit.name/2021/01/04/Mirai-Webhook-Bridge-Docs/"/>
+    <id>http://anania.staswit.name/2021/01/04/Mirai-Webhook-Bridge-Docs/</id>
+    <published>2021-01-04T15:32:52.000Z</published>
+    <updated>2021-01-04T15:35:42.961Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="接收消息"><a href="#接收消息" class="headerlink" title="接收消息"></a>接收消息</h2><p>[ws] /receiveMessage</p><p><code>请求</code></p><p>无</p><p><code>相应</code></p><pre><code class="json">&#123;    &quot;code&quot;:0,                                       // 状态码    &quot;errMsg&quot;:&quot;&quot;,                                    // 错误信息    &quot;sender&quot;:&#123;                                      // 发送者信息        &quot;fromGroup&quot;:&#123;                                           &quot;id&quot;:10000,                             // 群号            &quot;name&quot;:&quot;xxx&quot;,                           // 群名称            &quot;botPermission&quot;:&quot;owner&quot;                 // 机器人在群中的权限        &#125;,        &quot;id&quot;:1234567890,                            // 发送者账号        &quot;name&quot;:&quot;hello&quot;,                             // 发送者昵称（群中显示群名片）        &quot;permission&quot;:&quot;admin&quot;                        // 发送者权限    &#125;,    &quot;messageChain&quot;:[                                // 消息链        &#123;            &quot;msgID&quot;:10000,                          // 消息id            &quot;msgTime&quot;:22222,                        // 发送时间            &quot;msg&quot;:[                &#123;                    &quot;type&quot;:&quot;Plain&quot;,                 // 消息类型                    &quot;text&quot;:&quot;hello world&quot;,           // 消息内容                &#125;,                &#123;                    &quot;type&quot;:&quot;picture&quot;,                    &quot;sources&quot;:&quot;https://example.com/&quot;                &#125;            ]        &#125;    ]&#125;</code></pre><h2 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h2><p>[ws] /sendMessage</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;API&quot;&gt;&lt;a href=&quot;#API&quot; class=&quot;headerlink&quot; title=&quot;API&quot;&gt;&lt;/a&gt;API&lt;/h1&gt;&lt;h2 id=&quot;接收消息&quot;&gt;&lt;a href=&quot;#接收消息&quot; class=&quot;headerlink&quot; title=&quot;接收消息&quot;&gt;&lt;/a&gt;接收消</summary>
+      
+    
+    
+    
+    <category term="墨可莉雅" scheme="http://anania.staswit.name/categories/%E5%A2%A8%E5%8F%AF%E8%8E%89%E9%9B%85/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>中缀表达式的转换和计算</title>
