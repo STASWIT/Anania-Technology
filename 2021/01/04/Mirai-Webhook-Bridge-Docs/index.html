@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title>Mirai-Webhook-Bridge Docs | 墨染云华技术站</title>
+  <title>Mirai-Webhook-Bridge 思路文档 | 墨染云华技术站</title>
   <meta name="description" content="墨染云华技术站，墨云和墨可莉雅的技术博客" />
   <meta name="keywords" content="Linux,Java,C++,Sakura,Mirai,Moclia,Anania" />
   
@@ -287,11 +287,11 @@
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
     <div class="pattern-attachment-img">
-        <img src="/img/loader/loading.gif" data-src="https://cdn.jsdelivr.net/gh/STASWIT/staswit-website-using-sources/Anania-Technology/img/banner/donate.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+        <img src="/img/loader/loading.gif" data-src="https://cdn.jsdelivr.net/gh/STASWIT/staswit-website-using-sources/Anania-Technology/img/post/84497214_p0.jpg" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
       </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      Mirai-Webhook-Bridge Docs</h1>
+      Mirai-Webhook-Bridge 思路文档</h1>
       <p class="entry-census">
         <span>
           <a href="">
@@ -320,41 +320,88 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="接收消息"><a href="#接收消息" class="headerlink" title="接收消息"></a>接收消息</h2><p>[ws] /receiveMessage</p>
+          <h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="接收消息"><a href="#接收消息" class="headerlink" title="接收消息"></a>接收消息</h2><p>[ws] /receiveMessage?pluginKey=pluginKey</p>
 <p><code>请求</code></p>
-<p>无</p>
-<p><code>相应</code></p>
-<pre><code class="json">&#123;
-    &quot;code&quot;:0,                                       // 状态码
-    &quot;errMsg&quot;:&quot;&quot;,                                    // 错误信息
-    &quot;sender&quot;:&#123;                                      // 发送者信息
-        &quot;fromGroup&quot;:&#123;                               
-            &quot;id&quot;:10000,                             // 群号
-            &quot;name&quot;:&quot;xxx&quot;,                           // 群名称
-            &quot;botPermission&quot;:&quot;owner&quot;                 // 机器人在群中的权限
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">类型</th>
+<th align="center">可选</th>
+<th align="center">说明</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">pluginKey</td>
+<td align="center">string</td>
+<td align="center">false</td>
+<td align="center">插件的注册密钥</td>
+<td align="center">“qwerty”</td>
+</tr>
+</tbody></table>
+<p><code>响应</code></p>
+<pre><code class="json">    &#123;
+        &quot;code&quot;:0,                                       // 状态码
+        &quot;errMsg&quot;:&quot;&quot;,                                    // 错误信息
+        &quot;sender&quot;:&#123;                                      // 发送者信息
+            &quot;fromGroup&quot;:&#123;                               
+                &quot;id&quot;:10000,                             // 群号
+                &quot;name&quot;:&quot;xxx&quot;,                           // 群名称
+                &quot;botPermission&quot;:&quot;owner&quot;                 // 机器人在群中的权限
+            &#125;,
+            &quot;id&quot;:1234567890,                            // 发送者账号
+            &quot;name&quot;:&quot;hello&quot;,                             // 发送者昵称（群中显示群名片）
+            &quot;permission&quot;:&quot;admin&quot;                        // 发送者权限
         &#125;,
-        &quot;id&quot;:1234567890,                            // 发送者账号
-        &quot;name&quot;:&quot;hello&quot;,                             // 发送者昵称（群中显示群名片）
-        &quot;permission&quot;:&quot;admin&quot;                        // 发送者权限
-    &#125;,
-    &quot;messageChain&quot;:[                                // 消息链
-        &#123;
-            &quot;msgID&quot;:10000,                          // 消息id
-            &quot;msgTime&quot;:22222,                        // 发送时间
-            &quot;msg&quot;:[
-                &#123;
-                    &quot;type&quot;:&quot;Plain&quot;,                 // 消息类型
-                    &quot;text&quot;:&quot;hello world&quot;,           // 消息内容
-                &#125;,
-                &#123;
-                    &quot;type&quot;:&quot;picture&quot;,
-                    &quot;sources&quot;:&quot;https://example.com/&quot;
-                &#125;
-            ]
-        &#125;
-    ]
-&#125;</code></pre>
+        &quot;messageChain&quot;:[                                // 消息链
+            &#123;
+                &quot;msgID&quot;:10000,                          // 消息id
+                &quot;msgTime&quot;:22222,                        // 发送时间
+                &quot;msg&quot;:[
+                    &#123;
+                        &quot;type&quot;:&quot;plain&quot;,                 // 消息类型
+                        &quot;text&quot;:&quot;hello world&quot;,           // 消息内容
+                    &#125;,
+                    &#123;
+                        &quot;type&quot;:&quot;image&quot;,
+                        &quot;sources&quot;:&quot;https://example.com/&quot;
+                    &#125;
+                ]
+            &#125;
+        ]
+    &#125;</code></pre>
 <h2 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h2><p>[ws] /sendMessage</p>
+<p><code>请求</code></p>
+<pre><code class="json">    &#123;
+        &quot;pluginKey&quot;:&quot;qwerty&quot;,                           // 插件注册密钥
+        &quot;type&quot;: &quot;group&quot;,                                // 消息类型
+        &quot;target&quot;:10000,                                 // 发送到的号码
+        &quot;quote&quot;:0,                                      // 引用回复的消息id
+        &quot;messageChain&quot;:[                                
+            &#123;
+                &quot;msgID&quot;:0,                              // 消息id
+                &quot;msgTime&quot;:0,                            // 发送时间
+                &quot;msg&quot;:[
+                    &#123;
+                        &quot;type&quot;:&quot;plain&quot;,                 // 消息类型
+                        &quot;text&quot;:&quot;hello world&quot;            // 消息内容
+                    &#125;,
+                    &#123;
+                        &quot;type&quot;:&quot;image&quot;,                 // 消息类型
+                        &quot;localPath&quot;:&quot;&quot;,                 // 图片本地地址
+                        &quot;remoteURL&quot;:&quot;https://example.com/&quot;  // 图片远程地址
+                    &#125;
+                ]
+            &#125;
+        ]
+    &#125;</code></pre>
+<p><code>响应</code></p>
+<pre><code class="json">    &#123;
+        &quot;code&quot;:0,
+        &quot;errMsg&quot;:&quot;&quot;,
+        &quot;msgID&quot;:123456
+    &#125;</code></pre>
 
         </div>
         <!-- .entry-content -->
@@ -420,7 +467,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..."/>
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -432,10 +479,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Posts',
-            // PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',

@@ -320,7 +320,233 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          
+          <h2 id="中缀表达式转后缀表达式"><a href="#中缀表达式转后缀表达式" class="headerlink" title="中缀表达式转后缀表达式"></a>中缀表达式转后缀表达式</h2><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h3><pre><code class="cpp">    /*==============================================================================
+    *                            中缀表达式转后缀表达式
+    * ============================================================================*/
+    int toPostfixExpression(std::string infix)
+    &#123;
+        int expPoint = 0;
+        /*将表达式分解，依次入栈处理*/
+        for (expPoint = 0; expPoint &lt; infix.length(); expPoint++)
+        &#123;
+            if (isdigit(infix[expPoint]) != 0)
+            &#123;
+                /*如果是数字，直接入栈，如果是多位数，整合后入栈*/
+                if (expPoint != 0 &amp;&amp; isdigit(infix[expPoint - 1]) != 0)
+                &#123;
+                    tmpStr = infix[expPoint];
+                    tmpNum =
+                        atoi(expStack1.back().c_str()) * 10 +
+                        atoi(tmpStr.c_str());
+                    expStack1.pop_back();
+                    expStack1.push_back(std::to_string(tmpNum));
+                &#125;
+                else
+                &#123;
+                    tmpStr = infix[expPoint];
+                    expStack1.push_back(tmpStr);
+                &#125;
+            &#125;
+            else
+            &#123;
+                /*如果是运算符*/
+                if (opera.empty())
+                &#123;
+                    /*如果运算符栈是空栈，直接入栈*/
+                    opera.push_back(infix[expPoint]);
+                &#125;
+                else
+                &#123;
+                    /*如果不是空栈，判断上一个运算符*/
+                    switch (infix[expPoint]) // 第一级判断
+                    &#123;
+                    case &#39;+&#39;:
+                    case &#39;-&#39;:
+                        switch (opera.back()) // 加减第二级判断
+                        &#123;
+                        case &#39;+&#39;:
+                        case &#39;-&#39;:
+                            opera.push_back(infix[expPoint]);
+                            break;
+                        case &#39;*&#39;:
+                        case &#39;/&#39;:
+                        case &#39;d&#39;:
+                            tmpStr = opera.back();
+                            expStack1.push_back(tmpStr);
+                            opera.pop_back();
+                            opera.push_back(infix[expPoint]);
+                            break;
+                        case &#39;^&#39;:
+                            tmpStr = opera.back();
+                            expStack1.push_back(tmpStr);
+                            opera.pop_back();
+                            if (!opera.empty())
+                            &#123;
+                                switch (opera.back()) // 乘方第三级
+                                &#123;
+                                case &#39;+&#39;:
+                                case &#39;-&#39;:
+                                case &#39;(&#39;:
+                                    opera.push_back(infix[expPoint]);
+                                    break;
+                                case &#39;*&#39;:
+                                case &#39;/&#39;:
+                                case &#39;^&#39;:
+                                case &#39;d&#39;:
+                                    tmpStr = opera.back();
+                                    expStack1.push_back(tmpStr);
+                                    opera.pop_back();
+                                    opera.push_back(infix[expPoint]);
+                                    break;
+                                default:
+                                    break;
+                                &#125;
+                            &#125;
+                            else
+                            &#123;
+                                opera.push_back(infix[expPoint]);
+                            &#125;
+                            break;
+                        case &#39;(&#39;:
+                            opera.push_back(infix[expPoint]);
+                        default:
+                            break;
+                        &#125;
+                        break;
+                    case &#39;*&#39;:
+                    case &#39;/&#39;:
+                        switch (opera.back()) // 乘除第二级判断
+                        &#123;
+                        case &#39;+&#39;:
+                        case &#39;-&#39;:
+                        case &#39;*&#39;:
+                        case &#39;/&#39;:
+                            opera.push_back(infix[expPoint]);
+                            break;
+                        case &#39;d&#39;:
+                            tmpStr = opera.back();
+                            expStack1.push_back(tmpStr);
+                            opera.pop_back();
+                            opera.push_back(infix[expPoint]);
+                            break;
+                        case &#39;^&#39;:
+                            tmpStr = opera.back();
+                            expStack1.push_back(tmpStr);
+                            opera.pop_back();
+                            if (!opera.empty())
+                            &#123;
+                                switch (opera.back()) // 乘方第三级
+                                &#123;
+                                case &#39;+&#39;:
+                                case &#39;-&#39;:
+                                case &#39;*&#39;:
+                                case &#39;/&#39;:
+                                case &#39;(&#39;:
+                                    opera.push_back(infix[expPoint]);
+                                    break;
+                                case &#39;^&#39;:
+                                case &#39;d&#39;:
+                                    tmpStr = opera.back();
+                                    expStack1.push_back(tmpStr);
+                                    opera.pop_back();
+                                    opera.push_back(infix[expPoint]);
+                                    break;
+                                default:
+                                    break;
+                                &#125;
+                            &#125;
+                            else
+                            &#123;
+                                opera.push_back(infix[expPoint]);
+                            &#125;
+                            break;
+                        case &#39;(&#39;:
+                            opera.push_back(infix[expPoint]);
+                        default:
+                            break;
+                        &#125;
+                        break;
+                    case &#39;d&#39;:
+                        switch (opera.back()) // 掷骰第二级判断
+                        &#123;
+                        case &#39;+&#39;:
+                        case &#39;-&#39;:
+                        case &#39;*&#39;:
+                        case &#39;/&#39;:
+                        case &#39;d&#39;:
+                            opera.push_back(infix[expPoint]);
+                            break;
+                        case &#39;^&#39;:
+                            tmpStr = opera.back();
+                            expStack1.push_back(tmpStr);
+                            opera.pop_back();
+                            if (!opera.empty())
+                            &#123;
+                                switch (opera.back()) // 乘方第三级
+                                &#123;
+                                case &#39;+&#39;:
+                                case &#39;-&#39;:
+                                case &#39;*&#39;:
+                                case &#39;/&#39;:
+                                case &#39;d&#39;:
+                                case &#39;(&#39;:
+                                    opera.push_back(infix[expPoint]);
+                                    break;
+                                case &#39;^&#39;:
+                                    tmpStr = opera.back();
+                                    expStack1.push_back(tmpStr);
+                                    opera.pop_back();
+                                    opera.push_back(infix[expPoint]);
+                                    break;
+                                default:
+                                    break;
+                                &#125;
+                            &#125;
+                            else
+                            &#123;
+                                opera.push_back(infix[expPoint]);
+                            &#125;
+                            break;
+                        case &#39;(&#39;:
+                            opera.push_back(infix[expPoint]);
+                        default:
+                            break;
+                        &#125;
+                        break;
+                    case &#39;^&#39;:
+                    case &#39;(&#39;:
+                        opera.push_back(infix[expPoint]);
+                        break;
+                    case &#39;)&#39;:
+                        while (opera.back() != &#39;(&#39;)
+                        &#123;
+                            tmpStr = opera.back();
+                            expStack1.push_back(tmpStr);
+                            opera.pop_back();
+                        &#125;
+                        opera.pop_back();
+                        break;
+                    default:
+                        break;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+
+        /*将临时栈的低位运算符按顺序放入表达式栈*/
+        for (size_t operaPos = opera.size(); operaPos &gt; 0; operaPos--)
+        &#123;
+            tmpStr = opera.back();
+            expStack1.push_back(tmpStr);
+            opera.pop_back();
+        &#125;
+
+        /*清空使用后的通用变量*/
+        //tmpNum = 0;
+        //tmpStr.clear();
+        return 0;
+    &#125;</code></pre>
+
         </div>
         <!-- .entry-content -->
         
@@ -346,15 +572,15 @@
           
             <a href="/2021/01/04/Mirai-Webhook-Bridge-Docs/" rel="prev">
               <div class="background">
-<!--                <img class="lazyload" src="/img/loader/loading.gif" data-src="https://cdn.jsdelivr.net/gh/STASWIT/staswit-website-using-sources/Anania-Technology/img/banner/donate.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/STASWIT/staswit-website-using-sources/Anania-Technology/img/banner/donate.jpg">-->
+<!--                <img class="lazyload" src="/img/loader/loading.gif" data-src="https://cdn.jsdelivr.net/gh/STASWIT/staswit-website-using-sources/Anania-Technology/img/post/84497214_p0.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/STASWIT/staswit-website-using-sources/Anania-Technology/img/post/84497214_p0.jpg">-->
                 
-                <img class="lazyload" src="/img/loader/loading.gif" data-src="https://cdn.jsdelivr.net/gh/STASWIT/staswit-website-using-sources/Anania-Technology/img/banner/donate.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
+                <img class="lazyload" src="/img/loader/loading.gif" data-src="https://cdn.jsdelivr.net/gh/STASWIT/staswit-website-using-sources/Anania-Technology/img/post/84497214_p0.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" >
               </div>
               <span class="label">
               Previous Post</span>
               <div class="info">
                 <h3>
-                Mirai-Webhook-Bridge Docs</h3>
+                Mirai-Webhook-Bridge 思路文档</h3>
                 <hr>
               </div>
             </a>
@@ -404,7 +630,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..."/>
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -416,10 +642,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Posts',
-            // PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
