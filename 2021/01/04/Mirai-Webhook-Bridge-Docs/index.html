@@ -320,7 +320,9 @@
         <!--<div class="toc-entry-content"> <!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="接收消息"><a href="#接收消息" class="headerlink" title="接收消息"></a>接收消息</h2><p>[ws] /receiveMessage?pluginKey=pluginKey</p>
+          <h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h2 id="接收消息"><a href="#接收消息" class="headerlink" title="接收消息"></a>接收消息</h2><blockquote>
+<p>[ws] /receiveMessage?pluginKey=pluginKey</p>
+</blockquote>
 <p><code>请求</code></p>
 <table>
 <thead>
@@ -371,7 +373,9 @@
             &#125;
         ]
     &#125;</code></pre>
-<h2 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h2><p>[ws] /sendMessage</p>
+<h2 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h2><blockquote>
+<p>[ws] /sendMessage</p>
+</blockquote>
 <p><code>请求</code></p>
 <pre><code class="json">    &#123;
         &quot;pluginKey&quot;:&quot;qwerty&quot;,                           // 插件注册密钥
@@ -401,6 +405,33 @@
         &quot;code&quot;:0,
         &quot;errMsg&quot;:&quot;&quot;,
         &quot;msgID&quot;:123456
+    &#125;</code></pre>
+<h2 id="退出群聊（删除好友）"><a href="#退出群聊（删除好友）" class="headerlink" title="退出群聊（删除好友）"></a>退出群聊（删除好友）</h2><blockquote>
+<p>[ws] /botQuit?type=type&amp;id=targetid</p>
+</blockquote>
+<p><code>请求</code></p>
+<pre><code class="json">    &#123;
+        &quot;pluginKey&quot;:&quot;qwerty&quot;,                           // 插件注册密钥
+        &quot;type&quot;: &quot;group&quot;,                                // 类型
+        &quot;target&quot;:10000                                  // 退出的号码
+    &#125;</code></pre>
+<p><code>响应</code></p>
+<pre><code class="json">    &#123;
+        &quot;code&quot;:0,
+        &quot;errMsg&quot;:&quot;&quot;
+    &#125;</code></pre>
+<h2 id="撤回消息"><a href="#撤回消息" class="headerlink" title="撤回消息"></a>撤回消息</h2><blockquote>
+<p>[ws] /recall</p>
+</blockquote>
+<p><code>请求</code></p>
+<pre><code class="json">    &#123;
+        &quot;pluginKey&quot;:&quot;qwerty&quot;,
+        &quot;msgID&quot;:10000
+    &#125;</code></pre>
+<p><code>响应</code></p>
+<pre><code class="json">    &#123;
+        &quot;code&quot;:0,
+        &quot;errMsg&quot;:&quot;&quot;
     &#125;</code></pre>
 
         </div>
@@ -467,7 +498,7 @@
     <div class="ins-search-mask"></div>
     <div class="ins-search-container">
         <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <input type="text" class="ins-search-input" placeholder="Type something..."/>
             <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="ins-section-wrapper">
@@ -479,10 +510,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: '文章',
-            // PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
+            POSTS: 'Posts',
+            // PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
         },
         ROOT_URL: '/',
         CONTENT_URL: '/content.json',
